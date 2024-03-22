@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS job;
+
+--;;
+
+DROP EXTENSION IF EXISTS "uuid-ossp";

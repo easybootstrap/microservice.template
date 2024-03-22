@@ -1,0 +1,46 @@
+name: Tests Backend
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'resources/**'
+      - 'test/**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  tests:
+    needs: changes
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+    runs-on: ${{ matrix.operating-system }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Prepare java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Install clojure cli
+        uses: DeLaGuardo/setup-clojure@master
+        with:
+          cli: 1.11.1.1273
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/deps.edn') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run test ${{ matrix.test-to-run }}
+        run: clojure -M:test ${{ matrix.test-to-run }}
