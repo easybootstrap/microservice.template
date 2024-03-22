@@ -37,45 +37,45 @@
    :fail-fast? true}
   (flow "should interact with system"
 
-        (flow "prepare system with mocks"
-              [database (state-flow.api/get-state :database)]
-              (state/invoke
-               #(db.postgres.job/insert-job-transaction
-                 {:job/id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7"
-                  :job/title "Software Engineer II"
-                  :job/description "We are looking for a Software Engineer II to join our team"}
-                 database))
+    (flow "prepare system with mocks"
+      [database (state-flow.api/get-state :database)]
+      (state/invoke
+       #(db.postgres.job/insert-job-transaction
+         {:job/id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7"
+          :job/title "Software Engineer II"
+          :job/description "We are looking for a Software Engineer II to join our team"}
+         database))
 
-              (flow "should insert deposit into wallet"
-                    (match? (matchers/embeds {:status 200
-                                              :body  {:jobs [{:id "cd989358-af38-4a2f-a1a1-88096aa425a7"
-                                                              :title "Software Engineer II"
-                                                              :description "We are looking for a Software Engineer II to join our team"}]}})
-                            (aux.server/request! {:method :get
-                                                  :uri    "/job/"})))
+      (flow "should insert deposit into wallet"
+        (match? (matchers/embeds {:status 200
+                                  :body  {:jobs [{:id "cd989358-af38-4a2f-a1a1-88096aa425a7"
+                                                  :title "Software Engineer II"
+                                                  :description "We are looking for a Software Engineer II to join our team"}]}})
+                (aux.server/request! {:method :get
+                                      :uri    "/job/"})))
 
-              (flow "should insert a new job"
-                    (match? (matchers/embeds {:status 201
-                                              :body  {:id string? :title "SWE III" :description "We are looking for a Software Engineer III to join our team to work with clojure"}})
-                            (aux.server/request! {:method :post
-                                                  :uri    "/job/"
-                                                  :body   {:title "SWE III" :description "We are looking for a Software Engineer III to join our team to work with clojure"}})))
+      (flow "should insert a new job"
+        (match? (matchers/embeds {:status 201
+                                  :body  {:id string? :title "SWE III" :description "We are looking for a Software Engineer III to join our team to work with clojure"}})
+                (aux.server/request! {:method :post
+                                      :uri    "/job/"
+                                      :body   {:title "SWE III" :description "We are looking for a Software Engineer III to join our team to work with clojure"}})))
 
-              (flow "should list all jobs"
-                    (match? (matchers/embeds {:status 200
-                                              :body  {:jobs [{:id "cd989358-af38-4a2f-a1a1-88096aa425a7"
-                                                              :title "Software Engineer II"
-                                                              :description "We are looking for a Software Engineer II to join our team"}
-                                                             {:id string?
-                                                              :title "SWE III"
-                                                              :description "We are looking for a Software Engineer III to join our team to work with clojure"}]}})
-                            (aux.server/request! {:method :get
-                                                  :uri    "/job/"})))
+      (flow "should list all jobs"
+        (match? (matchers/embeds {:status 200
+                                  :body  {:jobs [{:id "cd989358-af38-4a2f-a1a1-88096aa425a7"
+                                                  :title "Software Engineer II"
+                                                  :description "We are looking for a Software Engineer II to join our team"}
+                                                 {:id string?
+                                                  :title "SWE III"
+                                                  :description "We are looking for a Software Engineer III to join our team to work with clojure"}]}})
+                (aux.server/request! {:method :get
+                                      :uri    "/job/"})))
 
-              (flow "should get job by id"
-                    (match? (matchers/embeds {:status 200
-                                              :body {:id "cd989358-af38-4a2f-a1a1-88096aa425a7"
-                                                     :title "Software Engineer II"
-                                                     :description "We are looking for a Software Engineer II to join our team"}})
-                            (aux.server/request! {:method :get
-                                                  :uri  "/job/cd989358-af38-4a2f-a1a1-88096aa425a7"}))))))
+      (flow "should get job by id"
+        (match? (matchers/embeds {:status 200
+                                  :body {:id "cd989358-af38-4a2f-a1a1-88096aa425a7"
+                                         :title "Software Engineer II"
+                                         :description "We are looking for a Software Engineer II to join our team"}})
+                (aux.server/request! {:method :get
+                                      :uri  "/job/cd989358-af38-4a2f-a1a1-88096aa425a7"}))))))
