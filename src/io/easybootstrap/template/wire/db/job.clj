@@ -1,6 +1,5 @@
 (ns io.easybootstrap.template.wire.db.job
-  (:require
-   [malli.core :as m]))
+  (:require [malli.core :as m]))
 
 (def Job [:map
           [:job/id uuid?]

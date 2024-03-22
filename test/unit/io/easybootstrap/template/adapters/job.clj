@@ -1,8 +1,7 @@
 (ns unit.io.easybootstrap.template.adapters.job
-  (:require
-   [clojure.test :refer [deftest is testing]]
-   [io.easybootstrap.template.adapters.job :as adapters.job]
-   [state-flow.assertions.matcher-combinators :refer [match?]]))
+  (:require [clojure.test :refer [deftest is testing]]
+            [io.easybootstrap.template.adapters.job :as adapters.job]
+            [state-flow.assertions.matcher-combinators :refer [match?]]))
 
 (deftest internal->wire
   (testing "convert internal job to wire job"

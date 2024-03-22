@@ -1,8 +1,7 @@
 (ns io.easybootstrap.template.controllers.job
-  (:require
-   [io.easybootstrap.template.mediator.db.postgres.job :as db.postgres.job]
-   [io.easybootstrap.template.wire.common :as wire.common]
-   [io.easybootstrap.template.wire.db.job :as wire.db.job]))
+  (:require [io.easybootstrap.template.mediator.db.postgres.job :as db.postgres.job]
+            [io.easybootstrap.template.wire.common :as wire.common]
+            [io.easybootstrap.template.wire.db.job :as wire.db.job]))
 
 (defn get-all
   {:malli/schema [:=> [:cat wire.common/Components] [:vector wire.db.job/Job]]}
