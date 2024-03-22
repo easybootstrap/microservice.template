@@ -25,25 +25,25 @@
    :cleanup utils/stop-system!
    :fail-fast? true}
   (flow "creates a table, insert data and checks return in the database"
-    [database (state-flow.api/get-state :database)]
+        [database (state-flow.api/get-state :database)]
 
-    (state/invoke
-     #(db.postgres.job/insert-job-transaction
-       {:job/id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7"
-        :job/title "Software Engineer II"
-        :job/description "We are looking for a Software Engineer II to join our team"}
-       database))
+        (state/invoke
+         #(db.postgres.job/insert-job-transaction
+           {:job/id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7"
+            :job/title "Software Engineer II"
+            :job/description "We are looking for a Software Engineer II to join our team"}
+           database))
 
-    (flow "check transaction was inserted in db"
-      (match? [{:job/id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7"
-                :job/title "Software Engineer II"
-                :job/created_at inst?
-                :job/description "We are looking for a Software Engineer II to join our team"}]
-              (db.postgres.job/get-all-jobs database)))
+        (flow "check transaction was inserted in db"
+              (match? [{:job/id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7"
+                        :job/title "Software Engineer II"
+                        :job/created_at inst?
+                        :job/description "We are looking for a Software Engineer II to join our team"}]
+                      (db.postgres.job/get-all-jobs database)))
 
-    (flow "check get by id, should return a job"
-      (match? {:job/id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7"
-               :job/title "Software Engineer II"
-               :job/created_at inst?
-               :job/description "We are looking for a Software Engineer II to join our team"}
-              (db.postgres.job/get-by-id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7" database)))))
+        (flow "check get by id, should return a job"
+              (match? {:job/id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7"
+                       :job/title "Software Engineer II"
+                       :job/created_at inst?
+                       :job/description "We are looking for a Software Engineer II to join our team"}
+                      (db.postgres.job/get-by-id #uuid "cd989358-af38-4a2f-a1a1-88096aa425a7" database)))))
