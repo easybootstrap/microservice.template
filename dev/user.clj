@@ -1,7 +1,8 @@
 (ns user
-  (:require [malli.dev :as dev]
-            [malli.dev.pretty :as pretty]
-            [io.easybootstrap.tempalte.server]))
+  (:require
+   [io.easybootstrap.tempalte.server]
+   [malli.dev :as dev]
+   [malli.dev.pretty :as pretty]))
 
 (defn start
   []
