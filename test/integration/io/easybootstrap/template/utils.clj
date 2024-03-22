@@ -1,8 +1,9 @@
 (ns integration.io.easybootstrap.template.utils
-  (:require [io.easybootstrap.helpers.logs :as logs]
-            [io.easybootstrap.helpers.migrations :as migrations]
-            [com.stuartsierra.component :as component]
-            [pg-embedded-clj.core :as pg-emb]))
+  (:require
+   [com.stuartsierra.component :as component]
+   [io.easybootstrap.helpers.logs :as logs]
+   [io.easybootstrap.helpers.migrations :as migrations]
+   [pg-embedded-clj.core :as pg-emb]))
 
 (defn start-system!
   [system-start-fn]

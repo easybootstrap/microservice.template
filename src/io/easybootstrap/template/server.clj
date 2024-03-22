@@ -1,13 +1,14 @@
 (ns io.easybootstrap.template.server
-  (:require [com.stuartsierra.component :as component]
-            [io.easybootstrap.components.clj-http :as http]
-            [io.easybootstrap.components.config :as config]
-            [io.easybootstrap.components.database :as database]
-            [io.easybootstrap.components.router :as router]
-            [io.easybootstrap.components.server :as webserver]
-            [io.easybootstrap.helpers.logs :as logs]
-            [io.easybootstrap.helpers.migrations :as migrations]
-            [io.easybootstrap.template.mediator.http-in :as http-in])
+  (:require
+   [com.stuartsierra.component :as component]
+   [io.easybootstrap.components.clj-http :as http]
+   [io.easybootstrap.components.config :as config]
+   [io.easybootstrap.components.database :as database]
+   [io.easybootstrap.components.router :as router]
+   [io.easybootstrap.components.server :as webserver]
+   [io.easybootstrap.helpers.logs :as logs]
+   [io.easybootstrap.helpers.migrations :as migrations]
+   [io.easybootstrap.template.mediator.http-in :as http-in])
   (:gen-class))
 
 (def system-atom (atom nil))

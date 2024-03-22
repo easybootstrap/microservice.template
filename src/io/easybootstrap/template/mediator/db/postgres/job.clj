@@ -1,9 +1,10 @@
 (ns io.easybootstrap.template.mediator.db.postgres.job
-  (:require [io.easybootstrap.template.wire.db.job :as wire.db.job]
-            [honey.sql :as sql]
-            [io.easybootstrap.components.database :as components.database]
-            [honey.sql.helpers :as sql.helpers]
-            [io.easybootstrap.template.wire.common :as wire.common]))
+  (:require
+   [honey.sql :as sql]
+   [honey.sql.helpers :as sql.helpers]
+   [io.easybootstrap.components.database :as components.database]
+   [io.easybootstrap.template.wire.common :as wire.common]
+   [io.easybootstrap.template.wire.db.job :as wire.db.job]))
 
 (defn insert-job-transaction
   {:malli/schema [:=> [:cat wire.db.job/Job wire.common/DatabaseComponent] :any]}

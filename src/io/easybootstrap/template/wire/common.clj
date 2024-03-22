@@ -1,9 +1,10 @@
 (ns io.easybootstrap.template.wire.common
-  (:require [com.stuartsierra.component :as component]
-            [malli.core :as m]
-            [io.easybootstrap.components.database :as components.database]
-            [io.easybootstrap.components.clj-http :as components.clj-http]
-            [malli.experimental.time :as met]))
+  (:require
+   [com.stuartsierra.component :as component]
+   [io.easybootstrap.components.clj-http :as components.clj-http]
+   [io.easybootstrap.components.database :as components.database]
+   [malli.core :as m]
+   [malli.experimental.time :as met]))
 
 (def HttpComponent
   (m/-simple-schema
