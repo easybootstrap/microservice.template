@@ -1,10 +1,9 @@
 (ns io.easybootstrap.template.mediator.http-in
-  (:require
-   [io.easybootstrap.template.adapters.job :as adapters.job]
-   [io.easybootstrap.template.controllers.job :as controllers.job]
-   [io.easybootstrap.template.wire.in.job :as wire.in.job]
-   [io.easybootstrap.template.wire.out.job :as wire.out.job]
-   [reitit.swagger :as swagger]))
+  (:require [io.easybootstrap.template.adapters.job :as adapters.job]
+            [io.easybootstrap.template.controllers.job :as controllers.job]
+            [io.easybootstrap.template.wire.in.job :as wire.in.job]
+            [io.easybootstrap.template.wire.out.job :as wire.out.job]
+            [reitit.swagger :as swagger]))
 
 (defn get-all [{components :components}]
   (let [jobs (->> (controllers.job/get-all components)

@@ -1,12 +1,10 @@
 (ns io.easybootstrap.template.adapters.job
-  (:require
-   [io.easybootstrap.template.wire.common :as wire.common]
-   [io.easybootstrap.template.wire.db.job :as wire.db.job]
-   [io.easybootstrap.template.wire.in.job :as wire.in.job]
-   [io.easybootstrap.template.wire.out.job :as wire.out.job])
-  (:import
-   [java.time ZoneId]
-   [java.time.format DateTimeFormatter]))
+  (:require [io.easybootstrap.template.wire.common :as wire.common]
+            [io.easybootstrap.template.wire.db.job :as wire.db.job]
+            [io.easybootstrap.template.wire.in.job :as wire.in.job]
+            [io.easybootstrap.template.wire.out.job :as wire.out.job])
+  (:import [java.time ZoneId]
+           [java.time.format DateTimeFormatter]))
 
 (defn ^:private date->localdatetime
   {:malli/schema [:=> [:cat inst? wire.common/JavaZoneId] wire.common/JavaLocalDateTime]}

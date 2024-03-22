@@ -1,15 +1,14 @@
 (ns integration.io.easybootstrap.template.db.postgres.db-test
-  (:require
-   [clojure.test :refer [use-fixtures]]
-   [com.stuartsierra.component :as component]
-   [integration.io.easybootstrap.template.utils :as utils]
-   [io.easybootstrap.components.config :as config]
-   [io.easybootstrap.components.database :as components.database]
-   [io.easybootstrap.helpers.malli :as helpers.malli]
-   [io.easybootstrap.template.mediator.db.postgres.job :as db.postgres.job]
-   [state-flow.api :refer [defflow match?]]
-   [state-flow.core :as state-flow :refer [flow]]
-   [state-flow.state :as state]))
+  (:require [clojure.test :refer [use-fixtures]]
+            [com.stuartsierra.component :as component]
+            [integration.io.easybootstrap.template.utils :as utils]
+            [io.easybootstrap.components.config :as config]
+            [io.easybootstrap.components.database :as components.database]
+            [io.easybootstrap.helpers.malli :as helpers.malli]
+            [io.easybootstrap.template.mediator.db.postgres.job :as db.postgres.job]
+            [state-flow.api :refer [defflow match?]]
+            [state-flow.core :as state-flow :refer [flow]]
+            [state-flow.state :as state]))
 
 (use-fixtures :once helpers.malli/with-intrumentation)
 

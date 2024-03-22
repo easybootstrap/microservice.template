@@ -5,17 +5,12 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
     branches: [ main ]
-    paths:
-      - 'src/**'
-      - 'resources/**'
-      - 'test/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   tests:
-    needs: changes
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
@@ -44,3 +39,49 @@ jobs:
 
       - name: Run test ${{ matrix.test-to-run }}
         run: clojure -M:test ${{ matrix.test-to-run }}
+
+  check-lint:
+
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+
+    runs-on: ${{ matrix.operating-system }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install clojure cli
+        uses: DeLaGuardo/setup-clojure@master
+        with:
+          cli: 1.11.1.1435
+
+      - name: Setup clojure-lsp
+        uses: clojure-lsp/setup-clojure-lsp@v1
+        with:
+          clojure-lsp-version: 2024.03.01-11.37.51
+
+      - name: Execute lint checks
+        run: |
+          clojure-lsp format --dry
+          clojure-lsp clean-ns --dry
+          clojure-lsp diagnostics
+
+  security:
+
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+
+    runs-on: ${{ matrix.operating-system }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Scan
+        uses: clj-holmes/clj-holmes-action@main
+        with:
+          output-type: 'stdout'
+          fail-on-result: 'true'
